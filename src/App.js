@@ -1,25 +1,42 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import Circles from './components/Circles';
+import CircleSelector from './components/CircleSelector';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state={
+    selectedButton:'',
+}
+
+setButton=(e)=> {
+    this.setState(state => ({
+        selectedButton:state.selectedButton=e.value
+    })) 
+}
+
+checkClass=(e)=>{
+    if(e.value == this.state.selectedButton){
+        return 'selected'
+    }
+}
+    componentDidMount =() => {
+        if(!this.state.selectedButton){
+        this.setState(state => ({
+            selectedButton:state.selectedButton=1
+        })) 
+    }
+    }
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">UNIT 4 FINAL ASSESSMENT</header>
+        <main className='App'>
+          <CircleSelector setButton={this.setButton} selectedButton={this.state.selectedButton} checkClass={this.checkClass}/>
+          <Circles setButton={this.setButton} selectedButton={this.state.selectedButton} checkClass={this.checkClass} />
+        </main>
+      </div>
+    );
+  }
 }
 
 export default App;
